@@ -243,6 +243,9 @@ enum {
 void __wmessage(const char *func, const char *file, int line, int type, const char *msg, ...)
 	__attribute__((__format__(printf,5,6)));
 
+void syslog_shutdown(void);
+
+
 /* ---[ WINGs/findfile.c ]------------------------------------------------ */
 
 /* For the 4 function below, you have to free the returned string when you no longer need it */
