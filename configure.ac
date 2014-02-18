@@ -678,13 +678,21 @@ AC_ARG_ENABLE([tiff],
     [enable_tiff=auto])
 WM_IMGFMT_CHECK_TIFF
 
+dnl WEBP Support
+dnl ===========
+AC_ARG_ENABLE([webp],
+    [AS_HELP_STRING([--disable-webp], [disable WEBP support through libwebp])],
+    [AS_CASE(["$enableval"],
+        [yes|no], [],
+        [AC_MSG_ERROR([bad value $enableval for --enable-webp])] )],
+    [enable_webp=auto])
+WM_IMGFMT_CHECK_WEBP
 
 dnl PPM Support
 dnl ===========
 # The PPM format is always enabled because we have built-in support for the format
 # We are not using any external library like libppm
 supported_gfx="$supported_gfx builtin-PPM"
-
 
 # Choice of the default format for icons
 AS_IF([test "x$enable_tiff" != "xno"],
