@@ -1,0 +1,586 @@
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Yaroslav Fedevych <yaroslav@fedevych.name>, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-02-22 01:49+0100\n"
+"PO-Revision-Date: 2014-02-22 02:19+0100\n"
+"Last-Translator: Yaroslav Fedevych <yaroslav@fedevych.name>\n"
+"Language-Team: Ukrainian <>\n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<"
+"=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Lokalize 1.5\n"
+
+#: ../../WINGs/error.c:117
+msgid "fatal: "
+msgstr "фатально: "
+
+#: ../../WINGs/error.c:124
+msgid "error: "
+msgstr "помилка: "
+
+#: ../../WINGs/error.c:131
+msgid "warn: "
+msgstr "увага: "
+
+#: ../../WINGs/findfile.c:58
+#, c-format
+msgid "could not get password entry for UID %i"
+msgstr "не вдалося отримати дані пароля для користувача з UID %i"
+
+#: ../../WINGs/findfile.c:87
+#, c-format
+msgid "could not get password entry for user %s"
+msgstr "не вдалося отримати дані пароля для користувача %s"
+
+#: ../../WINGs/findfile.c:203
+#, c-format
+msgid "could not expand %s"
+msgstr "не вдалося розкрити %s"
+
+#: ../../WINGs/findfile.c:435
+#, c-format
+msgid "Could not open %s"
+msgstr "Не вдалося відкрити %s"
+
+#: ../../WINGs/findfile.c:442
+#, c-format
+msgid "Could not create %s"
+msgstr "Не вдалося створити %s"
+
+#: ../../WINGs/proplist.c:78
+#, c-format
+msgid "syntax error in %s %s, line %i: %s"
+msgstr "помилка синтаксису в %s %s, рядок %i: %s"
+
+#: ../../WINGs/proplist.c:134
+msgid "Only string or data is supported for a proplist dictionary key"
+msgstr "Ключ словника proplist може бути лише рядком або даними"
+
+#: ../../WINGs/proplist.c:167 ../../WINGs/proplist.c:217
+#: ../../WINGs/proplist.c:382 ../../WINGs/proplist.c:458
+#: ../../WINGs/proplist.c:1048 ../../WINGs/proplist.c:1098
+#: ../../WINGs/proplist.c:1245 ../../WINGs/proplist.c:1313
+#: ../../WINGs/proplist.c:1418 ../../WINGs/proplist.c:1462
+msgid "Used proplist functions on non-WMPropLists objects"
+msgstr "Використання функцій proplist на об’єктах, відмінних від WMPropList"
+
+#: ../../WINGs/proplist.c:635
+msgid "unterminated PropList string"
+msgstr "незавершений рядок PropList"
+
+#: ../../WINGs/proplist.c:673
+msgid "unterminated PropList data"
+msgstr "незавершені дані PropList"
+
+#: ../../WINGs/proplist.c:681
+msgid "unterminated PropList data (missing hexdigit)"
+msgstr "незавершені дані PropList (бракує шістнадцяткового символа)"
+
+#: ../../WINGs/proplist.c:693 ../../WINGs/proplist.c:698
+msgid "non hexdigit character in PropList data"
+msgstr "нешістнадцятковий символ у даних PropList"
+
+#: ../../WINGs/proplist.c:730
+msgid "unterminated PropList array"
+msgstr "незавершений масив PropList"
+
+#: ../../WINGs/proplist.c:738
+msgid "missing or unterminated PropList array"
+msgstr "відсутній або незавершений масив PropList"
+
+#: ../../WINGs/proplist.c:748
+msgid "could not get PropList array element"
+msgstr "Не вдалось отримати елемент масиву PropList"
+
+#: ../../WINGs/proplist.c:775
+msgid "unterminated PropList dictionary"
+msgstr "незавершений словник PropList"
+
+#: ../../WINGs/proplist.c:792
+msgid "missing PropList dictionary key"
+msgstr "бракує ключа в словнику PropList"
+
+#: ../../WINGs/proplist.c:794
+msgid "missing PropList dictionary entry key or unterminated dictionary"
+msgstr "в словнику PropList бракує ключа, або словник не завершено"
+
+#: ../../WINGs/proplist.c:802
+msgid "error parsing PropList dictionary key"
+msgstr "помилка при читанні ключа словника PropList"
+
+#: ../../WINGs/proplist.c:810
+msgid "missing = in PropList dictionary entry"
+msgstr "бракує знака = в елементі словника PropList"
+
+#: ../../WINGs/proplist.c:818
+msgid "error parsing PropList dictionary entry value"
+msgstr "помилка при читанні значення елемента словника PropList"
+
+#: ../../WINGs/proplist.c:826
+msgid "missing ; in PropList dictionary entry"
+msgstr "бракує ; в елементі словника PropList"
+
+#: ../../WINGs/proplist.c:885
+msgid ""
+"was expecting a string, data, array or dictionary. If it's a string, try "
+"enclosing it with \"."
+msgstr ""
+"очікувались рядок, дані, масив або словник. Якщо це рядок, спробуйте "
+"взяти його в лапки (\")."
+
+#: ../../WINGs/proplist.c:888
+msgid "Comments are not allowed inside WindowMaker owned domain files."
+msgstr "Коментарі не допускаються в файлах доменів Window Maker."
+
+#: ../../WINGs/proplist.c:1482 ../../WINGs/proplist.c:1547
+#: ../../WINGs/proplist.c:1604
+msgid "extra data after end of property list"
+msgstr "зайві дані після закінчення списку властивостей"
+
+#: ../../WINGs/proplist.c:1522
+#, c-format
+msgid "could not get size for file '%s'"
+msgstr "не вдалось отримати розмір файла «%s»"
+
+#: ../../WINGs/proplist.c:1530
+#, c-format
+msgid "error reading from file '%s'"
+msgstr "помилка читання з файла «%s»"
+
+#: ../../WINGs/proplist.c:1575
+#, c-format
+msgid "%s:could not open menu file"
+msgstr "%s:не вдалося відкрити файл меню"
+
+#: ../../WINGs/proplist.c:1642
+#, c-format
+msgid "mkstemp (%s) failed"
+msgstr "виклик mkstemp (%s) завершився невдачею"
+
+#: ../../WINGs/proplist.c:1653
+#, c-format
+msgid "mktemp (%s) failed"
+msgstr "виклик mktemp (%s) завершився невдачею"
+
+#: ../../WINGs/proplist.c:1660
+#, c-format
+msgid "open (%s) failed"
+msgstr "виклик open (%s) завершився невдачею"
+
+#: ../../WINGs/proplist.c:1667
+#, c-format
+msgid "writing to file: %s failed"
+msgstr "запис у файл: невдача %s"
+
+#: ../../WINGs/proplist.c:1676
+#, c-format
+msgid "fclose (%s) failed"
+msgstr "виклик fclose (%s) завершився невдало"
+
+#: ../../WINGs/proplist.c:1684
+#, c-format
+msgid "rename ('%s' to '%s') failed"
+msgstr "виклик rename («%s» на «%s») завершився невдачею"
+
+#: ../../WINGs/proplist.c:1755
+#, c-format
+msgid "Could not create component %s"
+msgstr "Не вдалося створити компонент %s"
+
+#: ../../WINGs/userdefaults.c:65
+msgid "variable GNUSTEP_USER_ROOT defined with invalid path, not used"
+msgstr ""
+"змінна GNUSTEP_USER_ROOT вказує на неправильний шлях, тому не використовується"
+
+#. something happened with the file. just overwrite it
+#: ../../WINGs/userdefaults.c:196 ../../WINGs/userdefaults.c:211
+#, c-format
+msgid "cannot read domain from file '%s' when syncing"
+msgstr "не вдалося прочитати домен з файла «%s» під час синхронізації"
+
+#: ../../WINGs/wcolor.c:204 ../../WINGs/wcolor.c:214 ../../WINGs/wcolor.c:250
+#: ../../WINGs/wcolor.c:288
+#, c-format
+msgid "could not allocate %s color"
+msgstr "не вдалось виділити колір %s"
+
+#: ../../WINGs/wcolor.c:204
+msgid "white"
+msgstr "білий"
+
+#: ../../WINGs/wcolor.c:214
+msgid "black"
+msgstr "чорний"
+
+#: ../../WINGs/wcolor.c:250
+msgid "gray"
+msgstr "сірий"
+
+#: ../../WINGs/wcolor.c:288
+msgid "dark gray"
+msgstr "темно-сірий"
+
+#: ../../WINGs/wcolorpanel.c:383
+msgid "Colors"
+msgstr "Кольори"
+
+#: ../../WINGs/wcolorpanel.c:558 ../../WINGs/wcolorpanel.c:2624
+msgid "Brightness"
+msgstr "Яскравість"
+
+#: ../../WINGs/wcolorpanel.c:560 ../../WINGs/wcolorpanel.c:634
+#: ../../WINGs/wcolorpanel.c:665 ../../WINGs/wcolorpanel.c:696
+#: ../../WINGs/wcolorpanel.c:754 ../../WINGs/wcolorpanel.c:785
+#: ../../WINGs/wcolorpanel.c:817 ../../WINGs/wcolorpanel.c:850
+#: ../../WINGs/wcolorpanel.c:1988 ../../WINGs/wcolorpanel.c:2626
+#: ../../WINGs/wcolorpanel.c:2660 ../../WINGs/wcolorpanel.c:2694
+msgid "Color Panel: Could not allocate memory"
+msgstr "Панель кольорів: не вдалось виділити пам’ять"
+
+#: ../../WINGs/wcolorpanel.c:632
+msgid "Red"
+msgstr "Червоний"
+
+#: ../../WINGs/wcolorpanel.c:663
+msgid "Green"
+msgstr "Зелений"
+
+#: ../../WINGs/wcolorpanel.c:694
+msgid "Blue"
+msgstr "Синій"
+
+#: ../../WINGs/wcolorpanel.c:752
+msgid "Cyan"
+msgstr "Бірюзовий"
+
+#: ../../WINGs/wcolorpanel.c:783
+msgid "Magenta"
+msgstr "Пурпуровий"
+
+#: ../../WINGs/wcolorpanel.c:815
+msgid "Yellow"
+msgstr "Жовтий"
+
+#: ../../WINGs/wcolorpanel.c:848
+msgid "Black"
+msgstr "Чорний"
+
+#: ../../WINGs/wcolorpanel.c:923
+msgid "Spectrum"
+msgstr "Спектр"
+
+#: ../../WINGs/wcolorpanel.c:949
+msgid "Palette"
+msgstr "Палітра"
+
+#: ../../WINGs/wcolorpanel.c:954
+msgid "New from File..."
+msgstr "Створити з файла..."
+
+#: ../../WINGs/wcolorpanel.c:955 ../../WINGs/wcolorpanel.c:1000
+#: ../../WINGs/wcolorpanel.c:1015
+msgid "Rename..."
+msgstr "Перейменувати..."
+
+#: ../../WINGs/wcolorpanel.c:956 ../../WINGs/wcolorpanel.c:1001
+#: ../../WINGs/wcolorpanel.c:1016 ../../WINGs/wcolorpanel.c:3086
+msgid "Remove"
+msgstr "Усунути"
+
+#: ../../WINGs/wcolorpanel.c:957
+msgid "Copy"
+msgstr "Копіювати"
+
+#: ../../WINGs/wcolorpanel.c:958
+msgid "New from Clipboard"
+msgstr "Створити з буфера"
+
+#: ../../WINGs/wcolorpanel.c:977
+msgid "X11-Colors"
+msgstr "Кольори X11"
+
+#: ../../WINGs/wcolorpanel.c:994
+msgid "Color"
+msgstr "Колір"
+
+#: ../../WINGs/wcolorpanel.c:999
+msgid "Add..."
+msgstr "Додати..."
+
+#: ../../WINGs/wcolorpanel.c:1009
+msgid "List"
+msgstr "Список"
+
+#: ../../WINGs/wcolorpanel.c:1014
+msgid "New..."
+msgstr "Створити..."
+
+#: ../../WINGs/wcolorpanel.c:1142
+#, c-format
+msgid ""
+"Color Panel: Could not create directory %s needed to store configurations"
+msgstr ""
+"Панель кольорів: не вдалося створити каталог для зберігання конфігурацій"
+
+#. Delete the file, it doesn't belong here
+#: ../../WINGs/wcolorpanel.c:1148 ../../WINGs/wcolorpanel.c:2979
+#: ../../WINGs/wcolorpanel.c:2983
+msgid "File Error"
+msgstr "Помилка файлу"
+
+#: ../../WINGs/wcolorpanel.c:1149
+msgid "Could not create ColorPanel configuration directory"
+msgstr "Не вдалося створити каталог конфігурації ColorPanel"
+
+#: ../../WINGs/wcolorpanel.c:1150 ../../WINGs/wcolorpanel.c:2980
+#: ../../WINGs/wcolorpanel.c:2985 ../../WINGs/wcolorpanel.c:3010
+#: ../../WINGs/wfilepanel.c:227 ../../WINGs/wfilepanel.c:596
+#: ../../WINGs/wfilepanel.c:611 ../../WINGs/wfilepanel.c:712
+#: ../../WINGs/wfilepanel.c:890 ../../WINGs/wfontpanel.c:534
+msgid "OK"
+msgstr "Гаразд"
+
+#: ../../WINGs/wcolorpanel.c:1156
+msgid "Color Panel: Could not find file"
+msgstr "Панель кольорів: не вдалося знайти файл"
+
+#: ../../WINGs/wcolorpanel.c:1352 ../../WINGs/wcolorpanel.c:1413
+#: ../../WINGs/wcolorpanel.c:1473
+msgid "Color Panel: X failed request"
+msgstr "Панель кольорів: запит X не вдався"
+
+#: ../../WINGs/wcolorpanel.c:2658
+msgid "Saturation"
+msgstr "Насиченість"
+
+#: ../../WINGs/wcolorpanel.c:2692
+msgid "Hue"
+msgstr "Відтінок"
+
+#: ../../WINGs/wcolorpanel.c:2918
+msgid "Open Palette"
+msgstr "Відкрити палітру"
+
+#: ../../WINGs/wcolorpanel.c:2980
+msgid "Invalid file format !"
+msgstr "Неправильний формат файлу!"
+
+#: ../../WINGs/wcolorpanel.c:2982
+#, c-format
+msgid "can't remove file %s"
+msgstr "неможливо усунути файл %s"
+
+#: ../../WINGs/wcolorpanel.c:2984
+msgid "Couldn't remove file from Configuration Directory !"
+msgstr "Не вдалося усунути файл з каталога конфігурації!"
+
+#: ../../WINGs/wcolorpanel.c:3009
+msgid "Rename"
+msgstr "Перейменувати"
+
+#: ../../WINGs/wcolorpanel.c:3009
+msgid "Rename palette to:"
+msgstr "Перейменувати палітру на:"
+
+#: ../../WINGs/wcolorpanel.c:3010 ../../WINGs/wfilepanel.c:236
+#: ../../WINGs/wfilepanel.c:611 ../../WINGs/wfilepanel.c:712
+msgid "Cancel"
+msgstr "Скасувати"
+
+#. Careful, this palette exists already
+#: ../../WINGs/wcolorpanel.c:3026 ../../WINGs/wfilepanel.c:712
+msgid "Warning"
+msgstr "Увага"
+
+#: ../../WINGs/wcolorpanel.c:3027
+msgid ""
+"Palette already exists !\n"
+"\n"
+"Overwrite ?"
+msgstr ""
+"Палітра вже існує!\n"
+"\n"
+"Переписати?"
+
+#: ../../WINGs/wcolorpanel.c:3027 ../../WINGs/wcolorpanel.c:3086
+msgid "No"
+msgstr "Ні"
+
+#: ../../WINGs/wcolorpanel.c:3027 ../../WINGs/wcolorpanel.c:3086
+msgid "Yes"
+msgstr "Так"
+
+#: ../../WINGs/wcolorpanel.c:3058
+#, c-format
+msgid "Couldn't rename palette %s to %s"
+msgstr "Не вдалося перейменувати палітру з %s на %s"
+
+#: ../../WINGs/wcolorpanel.c:3081
+msgid "This will permanently remove the palette "
+msgstr "Це назавжди усуне палітру"
+
+#: ../../WINGs/wcolorpanel.c:3083
+msgid ""
+".\n"
+"\n"
+"Are you sure you want to remove this palette ?"
+msgstr ""
+".\n"
+"\n"
+"Ви певні, що бажаєте усунути цю палітру?"
+
+#: ../../WINGs/wcolorpanel.c:3105
+#, c-format
+msgid "Couldn't remove palette %s"
+msgstr "Не вдалося усунути палітру %s"
+
+#: ../../WINGs/wcolorpanel.c:3395
+msgid "Color Panel: Color unspecified"
+msgstr "Панель кольорів: колір не вказано"
+
+#: ../../WINGs/wfilepanel.c:216
+msgid "Name:"
+msgstr "Назва:"
+
+#: ../../WINGs/wfilepanel.c:306 ../../WINGs/wfilepanel.c:364
+msgid "Open"
+msgstr "Відкрити"
+
+#: ../../WINGs/wfilepanel.c:322 ../../WINGs/wfilepanel.c:370
+msgid "Save"
+msgstr "Зберегти"
+
+#: ../../WINGs/wfilepanel.c:506
+#, c-format
+msgid "WINGs: could not open directory %s\n"
+msgstr "WINGs: не вдалося відкрити каталог %s\n"
+
+#: ../../WINGs/wfilepanel.c:526
+#, c-format
+msgid "WINGs: could not stat %s\n"
+msgstr "WINGs: не вдалось викликати stat на %s\n"
+
+#: ../../WINGs/wfilepanel.c:596 ../../WINGs/wfilepanel.c:890
+#: ../../WINGs/wfontpanel.c:533
+msgid "Error"
+msgstr "Помилка"
+
+#: ../../WINGs/wfilepanel.c:610
+msgid "Create Directory"
+msgstr "Створити каталог"
+
+#: ../../WINGs/wfilepanel.c:611
+msgid "Enter directory name"
+msgstr "Введіть назву каталога"
+
+#: ../../WINGs/wfilepanel.c:639
+#, c-format
+msgid "Can not create %s: %s"
+msgstr "Неможливо створити %s: %s"
+
+#: ../../WINGs/wfilepanel.c:702
+#, c-format
+msgid "Can not find %s: %s"
+msgstr "Не вдається знайти %s: %s"
+
+#: ../../WINGs/wfilepanel.c:708
+#, c-format
+msgid "Delete %s %s?"
+msgstr "Видалити %s %s?"
+
+#: ../../WINGs/wfilepanel.c:709
+msgid "directory"
+msgstr "каталог"
+
+#: ../../WINGs/wfilepanel.c:709
+msgid "file"
+msgstr "файл"
+
+#: ../../WINGs/wfilepanel.c:716
+#, c-format
+msgid "Removing %s failed: %s"
+msgstr "Не вдалося видалити %s: %s"
+
+#: ../../WINGs/wfilepanel.c:749
+#, c-format
+msgid "An error occured browsing '%s'."
+msgstr "При перегляді «%s» виникла помилка."
+
+#: ../../WINGs/wfilepanel.c:752
+#, c-format
+msgid "'%s' is not a directory."
+msgstr "«%s» не є каталогом."
+
+#: ../../WINGs/wfilepanel.c:890
+msgid "File does not exist."
+msgstr "Файл не існує."
+
+#: ../../WINGs/wfont.c:37
+#, c-format
+msgid "invalid font: %s. Trying '%s'"
+msgstr "неправильний шрифт: %s. Спроба з «%s»"
+
+#: ../../WINGs/wfont.c:227 ../../WINGs/wfont.c:245
+#, c-format
+msgid "could not load font: %s."
+msgstr "не вдалося завантажити шрифт: %s."
+
+#. WMSetWidgetBackgroundColor(panel->win, WMWhiteColor(scr));
+#: ../../WINGs/wfontpanel.c:186
+msgid "Font Panel"
+msgstr "Панель шрифтів"
+
+#: ../../WINGs/wfontpanel.c:222
+msgid "The quick brown fox jumps over the lazy dog"
+msgstr ""
+"Жебракують філософи при ґанку церкви в Гадячі, ще й шатро їхнє п'яне знаємо"
+
+#: ../../WINGs/wfontpanel.c:228
+msgid "Family"
+msgstr "Родина"
+
+#: ../../WINGs/wfontpanel.c:239
+msgid "Typeface"
+msgstr "Гарнітура"
+
+#: ../../WINGs/wfontpanel.c:250
+msgid "Size"
+msgstr "Розмір"
+
+#: ../../WINGs/wfontpanel.c:269
+msgid "Set"
+msgstr "Встановити"
+
+#: ../../WINGs/wfontpanel.c:275
+msgid "Revert"
+msgstr "Відмінити"
+
+#: ../../WINGs/wfontpanel.c:534
+msgid "Could not init font config library\n"
+msgstr "Не вдалось ініціалізувати бібліотеку конфігурації шрифтів\n"
+
+#: ../../WINGs/widgets.c:389
+#, c-format
+msgid "WINGs: could not load widget images file: %s"
+msgstr "WINGs: не вдалось завантажити файл зображення для віджетів: %s"
+
+#: ../../WINGs/widgets.c:724
+msgid ""
+"could not load any fonts. Make sure your font installation and locale "
+"settings are correct."
+msgstr ""
+"не вдалось завантажити жодного шрифта. Переконайтесь, що у вас правильно "
+"встановлені шрифти й налаштована локаль."
+
+#: ../../WINGs/wruler.c:175
+msgid "0   inches"
+msgstr "0 дюймів"
+
