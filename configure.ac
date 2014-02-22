@@ -293,6 +293,11 @@ dnl =================
 AC_CHECK_HEADERS(sys/inotify.h, AC_DEFINE(HAVE_INOTIFY, 1, Check for inotify))
 
 
+dnl Check for syslog 
+dnl =================
+AC_CHECK_HEADERS(syslog.h, AC_DEFINE(HAVE_SYSLOG, 1, Check for syslog))
+
+
 dnl Checks for header files.
 dnl =======================
 AC_HEADER_SYS_WAIT
@@ -363,7 +368,7 @@ dnl List of supported locales
 dnl =========================
 supported_locales="be bg bs ca cs da de el es et fi fr gl hr hu hy it ja ko ms nl no pl pt ro ru sk sv tr zh_CN zh_TW"
 supported_wprefs_locales="bg ca cs de es et fi fr hr hu it ja ko pt ru sk zh_CN zh_TW"
-supported_wings_locales="bg ca cs de fr sk"
+supported_wings_locales="bg ca cs de fr hu sk"
 supported_util_locales="de es fr pt"
 
 for lang in $LINGUAS; do
@@ -673,13 +678,21 @@ AC_ARG_ENABLE([tiff],
     [enable_tiff=auto])
 WM_IMGFMT_CHECK_TIFF
 
+dnl WEBP Support
+dnl ===========
+AC_ARG_ENABLE([webp],
+    [AS_HELP_STRING([--disable-webp], [disable WEBP support through libwebp])],
+    [AS_CASE(["$enableval"],
+        [yes|no], [],
+        [AC_MSG_ERROR([bad value $enableval for --enable-webp])] )],
+    [enable_webp=auto])
+WM_IMGFMT_CHECK_WEBP
 
 dnl PPM Support
 dnl ===========
 # The PPM format is always enabled because we have built-in support for the format
 # We are not using any external library like libppm
 supported_gfx="$supported_gfx builtin-PPM"
-
 
 # Choice of the default format for icons
 AS_IF([test "x$enable_tiff" != "xno"],

@@ -85,6 +85,12 @@ static Atom net_wm_window_type_menu;
 static Atom net_wm_window_type_utility;
 static Atom net_wm_window_type_splash;
 static Atom net_wm_window_type_dialog;
+static Atom net_wm_window_type_dropdown_menu;
+static Atom net_wm_window_type_popup_menu;
+static Atom net_wm_window_type_tooltip;
+static Atom net_wm_window_type_notification;
+static Atom net_wm_window_type_combo;
+static Atom net_wm_window_type_dnd;
 static Atom net_wm_window_type_normal;
 static Atom net_wm_state;
 static Atom net_wm_state_modal;	/* XXX: what is this?!? */
@@ -115,6 +121,7 @@ static Atom net_wm_icon_geometry;	/* FIXME: should work together with net_wm_han
 static Atom net_wm_icon;
 static Atom net_wm_pid;		/* TODO */
 static Atom net_wm_handled_icons;	/* FIXME: see net_wm_icon_geometry */
+static Atom net_wm_window_opacity;
 
 static Atom net_frame_extents;
 
@@ -160,6 +167,12 @@ static atomitem_t atomNames[] = {
 	{"_NET_WM_WINDOW_TYPE_UTILITY", &net_wm_window_type_utility},
 	{"_NET_WM_WINDOW_TYPE_SPLASH", &net_wm_window_type_splash},
 	{"_NET_WM_WINDOW_TYPE_DIALOG", &net_wm_window_type_dialog},
+	{"_NET_WM_WINDOW_TYPE_DROPDOWN_MENU", &net_wm_window_type_dropdown_menu},
+	{"_NET_WM_WINDOW_TYPE_POPUP_MENU", &net_wm_window_type_popup_menu},
+	{"_NET_WM_WINDOW_TYPE_TOOLTIP", &net_wm_window_type_tooltip},
+	{"_NET_WM_WINDOW_TYPE_NOTIFICATION", &net_wm_window_type_notification},
+	{"_NET_WM_WINDOW_TYPE_COMBO", &net_wm_window_type_combo},
+	{"_NET_WM_WINDOW_TYPE_DND", &net_wm_window_type_dnd},
 	{"_NET_WM_WINDOW_TYPE_NORMAL", &net_wm_window_type_normal},
 	{"_NET_WM_STATE", &net_wm_state},
 	{"_NET_WM_STATE_MODAL", &net_wm_state_modal},
@@ -190,6 +203,7 @@ static atomitem_t atomNames[] = {
 	{"_NET_WM_ICON", &net_wm_icon},
 	{"_NET_WM_PID", &net_wm_pid},
 	{"_NET_WM_HANDLED_ICONS", &net_wm_handled_icons},
+	{"_NET_WM_WINDOW_OPACITY", &net_wm_window_opacity},
 
 	{"_NET_FRAME_EXTENTS", &net_frame_extents},
 
@@ -261,6 +275,12 @@ static void setSupportedHints(WScreen *scr)
 	atom[i++] = net_wm_window_type_utility;
 	atom[i++] = net_wm_window_type_splash;
 	atom[i++] = net_wm_window_type_dialog;
+	atom[i++] = net_wm_window_type_dropdown_menu;
+	atom[i++] = net_wm_window_type_popup_menu;
+	atom[i++] = net_wm_window_type_tooltip;
+	atom[i++] = net_wm_window_type_notification;
+	atom[i++] = net_wm_window_type_combo;
+	atom[i++] = net_wm_window_type_dnd;
 	atom[i++] = net_wm_window_type_normal;
 
 	atom[i++] = net_wm_state;
@@ -292,6 +312,7 @@ static void setSupportedHints(WScreen *scr)
 	atom[i++] = net_wm_icon_geometry;
 	atom[i++] = net_wm_icon;
 	atom[i++] = net_wm_handled_icons;
+	atom[i++] = net_wm_window_opacity;
 
 	atom[i++] = net_frame_extents;
 
@@ -470,6 +491,34 @@ static void updateIconImage(WWindow *wwin)
 		wIconUpdate(app->app_icon->icon);
 		wAppIconPaint(app->app_icon);
 	}
+}
+
+static void updateWindowOpacity(WWindow *wwin)
+{
+	Atom type;
+	int format;
+	unsigned long items, rest;
+	unsigned long *property;
+
+	if (!wwin->frame)
+		return;
+
+	/* We don't care about this ourselves, but other programs need us to copy
+	 * this to the frame window. */
+	if (XGetWindowProperty(dpy, wwin->client_win, net_wm_window_opacity, 0L, 1L,
+				False, XA_CARDINAL, &type, &format, &items, &rest,
+				(unsigned char **)&property) != Success)
+		return;
+
+	if (type == None) {
+		XDeleteProperty(dpy, wwin->frame->core->window, net_wm_window_opacity);
+	} else if (type == XA_CARDINAL && format == 32 && items == 1 && property) {
+		XChangeProperty(dpy, wwin->frame->core->window, net_wm_window_opacity,
+				XA_CARDINAL, 32, PropModeReplace, (unsigned char *)property, 1L);
+	}
+
+	if (property)
+		XFree(property);
 }
 
 static void updateShowDesktop(WScreen *scr, Bool show)
@@ -928,6 +977,16 @@ static int getWindowLayer(WWindow *wwin)
 				layer = WMNormalLevel;
 		}
 		/* //layer = WMPopUpLevel; // this seems a bad idea -Dan */
+	} else if (wwin->type == net_wm_window_type_dropdown_menu) {
+		layer = WMSubmenuLevel;
+	} else if (wwin->type == net_wm_window_type_popup_menu) {
+		layer = WMSubmenuLevel;
+	} else if (wwin->type == net_wm_window_type_tooltip) {
+	} else if (wwin->type == net_wm_window_type_notification) {
+		layer = WMPopUpLevel;
+	} else if (wwin->type == net_wm_window_type_combo) {
+		layer = WMSubmenuLevel;
+	} else if (wwin->type == net_wm_window_type_dnd) {
 	} else if (wwin->type == net_wm_window_type_normal) {
 	}
 
@@ -1102,7 +1161,10 @@ static Bool handleWindowType(WWindow *wwin, Atom type, int *layer)
 		wwin->client_flags.skip_switchpanel = 1;
 		wwin->client_flags.dont_move_off = 1;
 		wwin->client_flags.no_appicon = 1;
-	} else if (type == net_wm_window_type_menu) {
+	} else if (type == net_wm_window_type_menu ||
+			type == net_wm_window_type_dropdown_menu ||
+			type == net_wm_window_type_popup_menu ||
+			type == net_wm_window_type_combo) {
 		wwin->client_flags.no_titlebar = 1;
 		wwin->client_flags.no_resizable = 1;
 		wwin->client_flags.no_miniaturizable = 1;
@@ -1131,6 +1193,48 @@ static Bool handleWindowType(WWindow *wwin, Atom type, int *layer)
 		   // wwin->client_flags.skip_window_list = 1;
 		   // wwin->client_flags.no_appicon = 1;
 		 */
+	} else if (wwin->type == net_wm_window_type_tooltip) {
+		wwin->client_flags.no_titlebar = 1;
+		wwin->client_flags.no_resizable = 1;
+		wwin->client_flags.no_miniaturizable = 1;
+		wwin->client_flags.no_resizebar = 1;
+		wwin->client_flags.no_shadeable = 1;
+		wwin->client_flags.no_movable = 1;
+		wwin->client_flags.skip_window_list = 1;
+		wwin->client_flags.skip_switchpanel = 1;
+		wwin->client_flags.dont_move_off = 1;
+		wwin->client_flags.no_appicon = 1;
+		wwin->client_flags.no_focusable = 1;
+		wwin->flags.net_skip_pager = 1;
+	} else if (wwin->type == net_wm_window_type_notification) {
+		wwin->client_flags.no_titlebar = 1;
+		wwin->client_flags.no_resizable = 1;
+		wwin->client_flags.no_miniaturizable = 1;
+		wwin->client_flags.no_border = 1;
+		wwin->client_flags.no_resizebar = 1;
+		wwin->client_flags.no_shadeable = 1;
+		wwin->client_flags.no_movable = 1;
+		wwin->client_flags.omnipresent = 1;
+		wwin->client_flags.skip_window_list = 1;
+		wwin->client_flags.skip_switchpanel = 1;
+		wwin->client_flags.dont_move_off = 1;
+		wwin->client_flags.no_hide_others= 1;
+		wwin->client_flags.no_appicon = 1;
+		wwin->client_flags.no_focusable = 1;
+		wwin->flags.net_skip_pager = 1;
+	} else if (wwin->type == net_wm_window_type_dnd) {
+		wwin->client_flags.no_titlebar = 1;
+		wwin->client_flags.no_resizable = 1;
+		wwin->client_flags.no_miniaturizable = 1;
+		wwin->client_flags.no_border = 1;
+		wwin->client_flags.no_resizebar = 1;
+		wwin->client_flags.no_shadeable = 1;
+		wwin->client_flags.no_movable = 1;
+		wwin->client_flags.skip_window_list = 1;
+		wwin->client_flags.skip_switchpanel = 1;
+		wwin->client_flags.dont_move_off = 1;
+		wwin->client_flags.no_appicon = 1;
+		wwin->flags.net_skip_pager = 1;
 	} else if (type == net_wm_window_type_normal) {
 	} else {
 		ret = False;
@@ -1296,8 +1400,18 @@ void wNETWMCheckInitialClientState(WWindow *wwin)
 
 	wNETWMShowingDesktop(wwin->screen_ptr, False);
 
+	updateWindowType(wwin);
 	updateNetIconInfo(wwin);
 	updateIconImage(wwin);
+}
+
+void wNETWMCheckInitialFrameState(WWindow *wwin)
+{
+#ifdef DEBUG_WMSPEC
+	wmessage("wNETWMCheckInitialFrameState");
+#endif
+
+	updateWindowOpacity(wwin);
 }
 
 static void handleDesktopNames(WScreen *scr)
@@ -1470,6 +1584,8 @@ void wNETWMCheckClientHintChange(WWindow *wwin, XPropertyEvent *event)
 		}
 	} else if (event->atom == net_wm_icon) {
 		updateIconImage(wwin);
+	} else if (event->atom == net_wm_window_opacity) {
+		updateWindowOpacity(wwin);
 	}
 }
 

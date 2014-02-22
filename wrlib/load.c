@@ -3,6 +3,7 @@
  * Raster graphics library
  *
  * Copyright (c) 1997-2003 Alfredo K. Kojima
+ * Copyright (c) 2014 Window Maker Team
  *
  *  This library is free software; you can redistribute it and/or
  *  modify it under the terms of the GNU Library General Public
@@ -35,6 +36,10 @@
 
 #ifdef USE_PNG
 #include <png.h>
+#endif
+
+#ifdef USE_WEBP
+#include <webp/decode.h>
 #endif
 
 #include "wraster.h"
@@ -78,8 +83,8 @@ char **RSupportedFileFormats(void)
 
 	/* built-in */
 	tmp[i++] = "XPM";
-	/* built-in */
-	tmp[i++] = "PPM";
+	/* built-in PNM here refers to anymap format: PPM, PGM, PBM */
+	tmp[i++] = "PNM";
 #ifdef USE_TIFF
 	tmp[i++] = "TIFF";
 #endif
@@ -91,6 +96,9 @@ char **RSupportedFileFormats(void)
 #endif
 #ifdef USE_GIF
 	tmp[i++] = "GIF";
+#endif
+#ifdef USE_WEBP
+	tmp[i++] = "WEBP";
 #endif
 	tmp[i] = NULL;
 
@@ -190,6 +198,12 @@ RImage *RLoadImage(RContext * context, const char *file, int index)
 		break;
 #endif				/* USE_GIF */
 
+#ifdef USE_WEBP
+	case IM_WEBP:
+		image = RLoadWEBP(file, index);
+		break;
+#endif				/* USE_WEBP */
+
 	case IM_PPM:
 		image = RLoadPPM(file);
 		break;
@@ -264,6 +278,11 @@ char *RGetImageFileFormat(const char *file)
 		return "GIF";
 #endif				/* USE_GIF */
 
+#ifdef USE_WEBP
+	case IM_WEBP:
+		return "WEBP";
+#endif				/* USE_WEBP */
+
 	case IM_PPM:
 		return "PPM";
 
@@ -275,7 +294,7 @@ char *RGetImageFileFormat(const char *file)
 static WRImgFormat identFile(const char *path)
 {
 	FILE *file;
-	unsigned char buffer[32];
+	unsigned char buffer[17];
 	size_t nread;
 
 	assert(path != NULL);
@@ -295,7 +314,7 @@ static WRImgFormat identFile(const char *path)
 	RETRY( fclose(file) )
 
 	/* check for XPM */
-	if (strncmp((char *)buffer, "/* XPM */", 9) == 0)
+	if (strncmp((char *)buffer, "/* XPM", 6) == 0)
 		return IM_XPM;
 
 	/* check for TIFF */
@@ -303,14 +322,12 @@ static WRImgFormat identFile(const char *path)
 	    || (buffer[0] == 'M' && buffer[1] == 'M' && buffer[2] == 0 && buffer[3] == '*'))
 		return IM_TIFF;
 
-#ifdef USE_PNG
 	/* check for PNG */
-	if (!png_sig_cmp(buffer, 0, 8))
+	if (buffer[0] == 0x89 && buffer[1] == 'P' && buffer[2] == 'N' && buffer[3] == 'G')
 		return IM_PNG;
-#endif
 
-	/* check for raw PPM or PGM */
-	if (buffer[0] == 'P' && (buffer[1] == '5' || buffer[1] == '6'))
+	/* check for PBM or PGM or PPM */
+	if (buffer[0] == 'P' && (buffer[1] > '0' && buffer[1] < '7') && (buffer[2] == 0x0a || buffer[2] == 0x20 || buffer[2] == 0x09 || buffer[2] == 0x0d))
 		return IM_PPM;
 
 	/* check for JPEG */
@@ -318,8 +335,31 @@ static WRImgFormat identFile(const char *path)
 		return IM_JPEG;
 
 	/* check for GIF */
-	if (buffer[0] == 'G' && buffer[1] == 'I' && buffer[2] == 'F')
+	if (buffer[0] == 'G' && buffer[1] == 'I' && buffer[2] == 'F' && buffer[3] == '8')
 		return IM_GIF;
+
+#ifdef USE_WEBP
+	/* check for WEBP */
+	if (buffer[ 0] == 'R' &&
+                     buffer[ 1] == 'I' &&
+                     buffer[ 2] == 'F' &&
+                     buffer[ 3] == 'F' &&
+                     buffer[ 8] == 'W' &&
+		     buffer[ 9] == 'E' &&
+                     buffer[10] == 'B' &&
+                     buffer[11] == 'P' &&
+                     buffer[12] == 'V' &&
+                     buffer[13] == 'P' &&
+                     buffer[14] == '8' &&
+#if WEBP_DECODER_ABI_VERSION < 0x0003 /* old versions don't support WEBPVP8X and WEBPVP8L */
+			buffer[15] == ' ')
+#else
+			(buffer[15] == ' ' || buffer[15] == 'X' || buffer[15] == 'L'))
+#endif
+#endif
+
+	return IM_WEBP;
+
 
 	return IM_UNKNOWN;
 }

@@ -4582,10 +4582,8 @@ static void swapDrawers(WScreen *scr, int new_x)
 
 	scr->drawer_tile = wDrawerMakeTile(scr, scr->icon_tile);
 
-	for (dc = scr->drawers; dc != NULL; dc = dc->next) {
+	for (dc = scr->drawers; dc != NULL; dc = dc->next)
 		swapDrawer(dc->adrawer, new_x);
-		assert(dc->adrawer->on_right_side == on_right_side);
-	}
 }
 
 

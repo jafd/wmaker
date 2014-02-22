@@ -160,6 +160,11 @@ static RETSIGTYPE handleExitSig(int sig)
 	}
 
 	sigprocmask(SIG_UNBLOCK, &sigs, NULL);
+
+#ifdef HAVE_SYSLOG
+	syslog_shutdown();
+#endif
+
 	DispatchEvent(NULL);	/* Dispatch events imediately. */
 }
 
